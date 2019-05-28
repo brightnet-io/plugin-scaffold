@@ -27,3 +27,7 @@ Session.vim
 # Windows
 Thumbs.db
 Desktop.ini
+
+# Local docker bindings
+logs
+volumes
