@@ -9,7 +9,7 @@
     "role": "developer"
   },
   "scripts": {
-    "test": "phpunit",
+    "test": "node bin/phpunit.js",
     "start": "composer install && npm install && npm run build",
     "build": "cross-env NODE_ENV=production webpack --config config/webpack.prod.js",
     "dev": "cross-env NODE_ENV=development webpack --config config/webpack.dev.js",
