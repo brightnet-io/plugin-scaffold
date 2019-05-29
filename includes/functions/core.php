@@ -7,6 +7,7 @@
 
 namespace TenUpScaffold\Core;
 
+use TenUpScaffold\Admin\UpdateManager;
 use \WP_Error as WP_Error;
 
 /**
