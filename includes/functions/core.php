@@ -8,7 +8,7 @@
 namespace TenUpScaffold\Core;
 
 use TenUpScaffold\Admin\UpdateManager;
-use \WP_Error as WP_Error;
+use WP_Error as WP_Error;
 
 /**
  * Default setup routine
@@ -16,7 +16,7 @@ use \WP_Error as WP_Error;
  * @return void
  */
 function setup() {
-	$n = function( $function ) {
+	$n = function ( $function ) {
 		return __NAMESPACE__ . "\\$function";
 	};
 	add_action( 'plugins_loaded', $n( 'maybe_update' ), 5 );
@@ -233,6 +233,7 @@ function admin_styles() {
  * Enqueue editor styles. Filters the comma-delimited list of stylesheets to load in TinyMCE.
  *
  * @param string $stylesheets Comma-delimited list of stylesheets.
+ *
  * @return string
  */
 function mce_css( $stylesheets ) {
@@ -249,8 +250,10 @@ function mce_css( $stylesheets ) {
  * Add async/defer attributes to enqueued scripts that have the specified script_execution flag.
  *
  * @link https://core.trac.wordpress.org/ticket/12009
- * @param string $tag    The script tag.
+ *
+ * @param string $tag The script tag.
  * @param string $handle The script handle.
+ *
  * @return string
  */
 function script_loader_tag( $tag, $handle ) {
@@ -295,4 +298,22 @@ function maybe_update() {
  */
 function code_version() {
 	return TENUP_SCAFFOLD_VERSION;
+}
+
+/**
+ * Callback for spl_autoload_register to autoload classes in the TenUpScaffold names space from includes/classes dir.
+ *
+ * @param $class_name
+ */
+function tenup_scaffold_namespace_autoload( $class_name ) {
+	$namespace_prefix     = 'TenUpScaffold\\';
+	$namespace_prefix_len = strlen( $namespace_prefix );
+	$namespace_base_dir   = __DIR__ . '/../classes/';
+	if ( strncmp( $namespace_prefix, $class_name, $namespace_prefix_len ) == 0 ) { // Does class use prefix
+		$class_name_in_namespace = substr( $class_name, $namespace_prefix_len );
+		$file                    = $namespace_base_dir . str_replace( '\\', '/', $class_name_in_namespace ) . '.php';
+		if ( file_exists( $file ) ) {
+			require_once $file;
+		}
+	}
 }

@@ -28,7 +28,9 @@ register_deactivation_hook( __FILE__, '\TenUpScaffold\Core\deactivate' );
 // Bootstrap.
 TenUpScaffold\Core\setup();
 
-// Require Composer autoloader if it exists.
+// Require Composer autoloader if it exists, else try spl_autoload_register
 if ( file_exists( TENUP_SCAFFOLD_PATH . '/vendor/autoload.php' ) ) {
 	require_once TENUP_SCAFFOLD_PATH . 'vendor/autoload.php';
+} else {
+	spl_autoload_register( '\TenUpScaffold\Core\tenup_scaffold_namespace_autoload');
 }
