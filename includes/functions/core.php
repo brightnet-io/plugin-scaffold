@@ -18,13 +18,14 @@ function setup() {
 	$n = function( $function ) {
 		return __NAMESPACE__ . "\\$function";
 	};
-
+	add_action( 'plugins_loaded', $n( 'maybe_update' ), 5 );
 	add_action( 'init', $n( 'i18n' ) );
 	add_action( 'init', $n( 'init' ) );
 	add_action( 'wp_enqueue_scripts', $n( 'scripts' ) );
 	add_action( 'wp_enqueue_scripts', $n( 'styles' ) );
 	add_action( 'admin_enqueue_scripts', $n( 'admin_scripts' ) );
 	add_action( 'admin_enqueue_scripts', $n( 'admin_styles' ) );
+
 
 	// Editor styles. add_editor_style() doesn't work outside of a theme.
 	add_filter( 'mce_css', $n( 'mce_css' ) );
@@ -275,4 +276,22 @@ function script_loader_tag( $tag, $handle ) {
 	}
 
 	return $tag;
+}
+
+/**
+ *  Check for and perform any plugin updates.
+ */
+function maybe_update() {
+	$updater = UpdateManager::get_instance();
+	$updated = $updater->maybe_update();
+}
+
+
+/**
+ * Convenience method to return the current code version of the plugin.
+ *
+ * @return string code version of plugin as defined by constant TENUP_SCAFFOLD_VERSION
+ */
+function code_version() {
+	return TENUP_SCAFFOLD_VERSION;
 }
