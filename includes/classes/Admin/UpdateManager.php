@@ -48,7 +48,7 @@ class UpdateManager {
 	 * @return bool true if update required, otherwise false
 	 */
 	protected function requires_update( $current_version, $target_version ) {
-		fwrite(STDOUT,sprintf('updater->requires current %s target %s' . PHP_EOL,$current_version,$target_version));
+
 		// If current version is not set (new install) or version constant in code is higher, then update is required
 		return empty( $current_version ) || ! ! version_compare( $target_version, $current_version, '>' );
 

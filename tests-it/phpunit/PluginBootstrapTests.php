@@ -29,7 +29,7 @@ class PluginBootstrapTests extends \WP_UnitTestCase {
 	public function test_enqueued_scripts() {
 
 		do_action( 'wp_enqueue_scripts' );
-		$this->assertTrue( wp_script_is( 'tenup_scaffold__frontend' ) );
+		$this->assertTrue( wp_script_is( 'tenup_scaffold_frontend' ) );
 		$this->assertTrue( wp_script_is( 'tenup_scaffold_shared' ) );
 		$this->assertFalse( wp_script_is( 'tenup_scaffold_admin' ) );
 
@@ -71,7 +71,7 @@ class PluginBootstrapTests extends \WP_UnitTestCase {
 	 * Test that the updater/installer ran
 	 */
 	public function test_sets_version_option() {
-		$this->assertEquals( TENUP_SCAFFOL_VERSION, get_option( 'tenup_scaffold_version' ) );
+		$this->assertEquals( TENUP_SCAFFOLD_VERSION, get_option( 'tenup_scaffold_version' ) );
 	}
 
 

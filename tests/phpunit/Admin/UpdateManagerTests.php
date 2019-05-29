@@ -7,7 +7,11 @@ use TenUpScaffold\TestCase;
 
 class UpdateManagerTests extends TestCase {
 
-
+	/**
+	 * It should update when there is no previous version.
+	 *
+	 * @runInSeparateProcess true
+	 */
 	public function test_updates_when_no_previous_version() {
 		// Setup
 		\WP_Mock::userFunction( 'get_option', array(
@@ -41,7 +45,11 @@ class UpdateManagerTests extends TestCase {
 
 	}
 
-
+	/**
+	 * It should update when the 'code version' is higher than the current version
+	 *
+	 * @runInSeparateProcess true
+	 */
 	public function test_updates_when_new_version() {
 		// Setup
 		\WP_Mock::userFunction( 'get_option', array(
@@ -75,6 +83,11 @@ class UpdateManagerTests extends TestCase {
 	}
 
 
+	/**
+	 * It should not update when the 'code version' is equal to the current version
+	 *
+	 * @runInSeparateProcess true
+	 */
 	public function test_does_not_update_equal_version() {
 		// Setup
 
@@ -104,7 +117,11 @@ class UpdateManagerTests extends TestCase {
 		$this->assertConditionsMet();
 	}
 
-
+	/**
+	 * It should not update when the 'code version' is older than the current version.
+	 *
+	 * @runInSeparateProcess true
+	 */
 	public function test_does_not_update_older_version() {
 		// Setup
 
