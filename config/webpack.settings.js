@@ -9,10 +9,10 @@ module.exports = {
 		'shared': './assets/js/shared/shared.js',
 
 		// CSS files.
-		'admin-style': './assets/css/admin/admin-style.css',
-		'editor-style': './assets/css/frontend/editor-style.css',
-		'shared-style': './assets/css/shared/shared-style.css',
-		'style': './assets/css/frontend/style.css',
+		'admin-style': './assets/css/admin/admin-style.scss',
+		'editor-style': './assets/css/frontend/editor-style.scss',
+		'shared-style': './assets/css/shared/shared-style.scss',
+		'style': './assets/css/frontend/style.scss',
 	},
 	filename: {
 		js: 'js/[name].js',

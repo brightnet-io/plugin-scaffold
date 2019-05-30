@@ -78,7 +78,7 @@ module.exports = {
 
 			// Styles.
 			{
-				test: /\.css$/,
+				test: /\.(sa|sc|c)ss$/,
 				include: path.resolve( process.cwd(), settings.paths.src.css ),
 				use: [
 					{
@@ -98,6 +98,9 @@ module.exports = {
 							sourceMap: ! isProduction,
 						},
 					},
+					{
+						loader: 'sass-loader'
+					}
 				],
 			},
 		],
@@ -132,7 +135,7 @@ module.exports = {
 		// Lint CSS.
 		new StyleLintPlugin( {
 			context: path.resolve( process.cwd(), settings.paths.src.css ),
-			files: '**/*.css',
+			files: '**/*.(sa|sc|c)ss',
 		} ),
 
 		// Fancy WebpackBar.
